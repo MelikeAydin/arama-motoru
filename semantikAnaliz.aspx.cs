@@ -21,106 +21,7 @@ namespace yazlabYam1
             ekle();
             
         }
-        //private static string urlPattern = @"http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?";
-        //private static string tagPattern = @"<a\b[^>]*(.*?)</a>";
-        //private static string emailPattern = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";
-
-
-        //List<string> deneme = new List<string>();
-
-        //public static List<string> getInnerUrls(string url)
-        //{
-        //    List<string> innerUrls = new List<string>();
-        //    WebRequest request = WebRequest.Create(url);
-        //    StreamReader reader = new StreamReader(request.GetResponse().GetResponseStream());
-        //    string htmlCode = reader.ReadToEnd();
-
-        //    List<string> links = getMatches(htmlCode);
-        //    foreach (string link in links)
-        //    {
-        //        if (!Regex.IsMatch(link, urlPattern) && !Regex.IsMatch(link, emailPattern))
-        //        {
-        //            string absoluteUrlPath = getAblosuteUrl(getDomainName(url), link);
-        //            innerUrls.Add(absoluteUrlPath);
-        //        }
-        //        else
-        //        {
-        //            innerUrls.Add(link);
-        //        }
-        //    }
-        //    return innerUrls;
-        //}
-
-        //private static List<string> getMatches(string source)
-        //{
-        //    var matchesList = new List<string>();
-        //    MatchCollection matches = Regex.Matches(source, tagPattern);
-        //    foreach (Match match in matches)
-        //    {
-        //        string val = match.Value.Trim();
-        //        if (val.Contains("href=\""))
-        //        {
-        //            string link = getSubstring(val, "href=\"", "\"");
-        //            matchesList.Add(link);
-        //        }
-        //    }
-
-        //    return matchesList;
-        //}
-        //private static string getSubstring(string source, string start, string end)
-        //{
-        //    int startIndex = source.IndexOf(start) + start.Length;
-        //    int length = source.IndexOf(end, startIndex) - startIndex;
-        //    return source.Substring(startIndex, length);
-        //}
-        //private static string getAblosuteUrl(string domainName, string path)
-        //{  
-            
-        //        string absoluteUrl = "";
-        //        if (domainName[domainName.Length - 1] == '/')
-        //        {
-        //            absoluteUrl += domainName;
-        //        }
-        //        else
-        //        {
-        //            absoluteUrl += domainName + "/";
-        //        }
-
-        //        if (path.Contains("../"))
-        //        {
-        //            string temp = domainName.Substring(0, domainName.LastIndexOf("/", 6));
-        //            temp = temp.Substring(0, temp.LastIndexOf("/", 5));
-        //            absoluteUrl = temp + path.Substring(3);
-        //            return absoluteUrl;
-        //        }
-        //        if (path.Contains("./"))
-        //        {
-        //            string temp = domainName.Substring(0, domainName.LastIndexOf("/", 7));
-        //            absoluteUrl = temp + path.Substring(4);
-        //            return absoluteUrl;
-        //        }
-           
-        //        if (path[0] == '/')
-        //        {
-        //            absoluteUrl += path.Substring(1);
-        //            return absoluteUrl;
-               
-        //        }
-        //        absoluteUrl += path;
-            
-           
-
-        //    return absoluteUrl;
-        //}
-        //private static string getDomainName(string url)
-        //{
-        //    int length = url.IndexOf("/", 8);
-        //    string domainName = url.Substring(0, length);
-        //    return domainName;
-        //}
-
-
-
+     
 
 
         public TextBox[] tb = new TextBox[10]; // url txtbox
@@ -230,7 +131,6 @@ namespace yazlabYam1
                 Microsoft.Office.Interop.Word.SynonymInfo si = appWord.get_SynonymInfo(kelimeKumesi[i], ref (objLanguage));
 
 
-                // first find out how many meanings were found for word
                 int iMeanings = (int)si.MeaningCount;
 
                 if (iMeanings > 0)
@@ -239,9 +139,6 @@ namespace yazlabYam1
                     if (strMeanings != null)
                         foreach (var strMeaning in strMeanings)
                         {
-                            // get Synonym List for each meaning... note that
-                            // get_SynonymList takes an object ref, thus we
-                            // must create objMeaning object
                             var objMeaning = strMeaning;
 
                             var aSynonyms = si.SynonymList[objMeaning];
@@ -250,8 +147,6 @@ namespace yazlabYam1
                             if (strSynonyms != null)
                                 foreach (string strSynonym in strSynonyms)
                                 {
-                                    // loop over each synonym in ArrayList
-                                    // and add to lbSynonym ListBox
                                     synonym.Add(strSynonym);
 }
 
@@ -264,12 +159,8 @@ namespace yazlabYam1
                 }
                 else
                 {
-                    // no meanings/synonyms found... set ListBox value to "NONE"
                     synonym.Add("NONE");
                 }
-                // Clean up COM object
-
-                // quit WINWORD app
                 appWord.Quit(ref objFalse, ref objNull, ref objNull);
             }
            
@@ -329,17 +220,6 @@ namespace yazlabYam1
                 ycdeger2 = 0;
                 string link2 = urlKumesi[j];
                 string link = UrliLinkeCevir(link2);
-                //sonuclar2[i] = deger / (kelimeKumesi.Length - 1);
-
-
-
-                //for (int s = 0; s < 3; s++)
-                //{
-                //    // List<string> deneme = new List<string>();
-                //    deneme = getInnerUrls(urlKumesi[j]);
-                //}
-
-                //Label4.Text += link + "   " + yckıkartmadizi[j] + "   " + deneme[0].ToString() + "    " + deneme[1].ToString() + "    " + deneme[2].ToString() + "<br/>";
             }
         }
 
